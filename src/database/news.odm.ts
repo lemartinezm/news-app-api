@@ -15,6 +15,7 @@ export async function getAllNews(
 
     await newsModel
       .find({})
+      .sort({ publishedAt: -1 })
       .skip(documentsPerPage * (currentPage - 1))
       .limit(documentsPerPage)
       .then((articles) => {
@@ -51,6 +52,7 @@ export async function getNewsByCategory(
 
     await newsModel
       .find({ category })
+      .sort({ publishedAt: -1 })
       .skip(documentsPerPage * (currentPage - 1))
       .limit(documentsPerPage)
       .then((articles) => {
@@ -89,6 +91,7 @@ export async function searchNews(
 
     await newsModel
       .find({ $text: { $search: search } })
+      .sort({ publishedAt: -1 })
       .skip(documentsPerPage * (currentPage - 1))
       .limit(documentsPerPage)
       .then((articles) => {

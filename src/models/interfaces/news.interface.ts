@@ -9,7 +9,7 @@ export interface NewsSchema {
   description: string;
   url: string;
   urlToImage: string;
-  publishedAt: string;
+  publishedAt: Date;
   content: string;
   category: string;
 }

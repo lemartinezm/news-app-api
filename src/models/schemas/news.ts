@@ -10,7 +10,7 @@ export function newsEntity() {
     description: { type: String, required: true, index: 'text' },
     url: { type: String, required: true },
     urlToImage: { type: String, required: true },
-    publishedAt: { type: String, required: true },
+    publishedAt: { type: Date, required: true },
     content: { type: String, required: true },
     category: {
       type: String,
