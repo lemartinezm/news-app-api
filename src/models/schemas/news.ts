@@ -12,7 +12,19 @@ export function newsEntity() {
     urlToImage: { type: String, required: true },
     publishedAt: { type: String, required: true },
     content: { type: String, required: true },
-    category: { type: String, required: true },
+    category: {
+      type: String,
+      required: true,
+      enum: [
+        'business',
+        'entertainment',
+        'general',
+        'health',
+        'science',
+        'sports',
+        'technology',
+      ],
+    },
   });
 
   return mongoose.models.New || mongoose.model('New', newsSchema);
