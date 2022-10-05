@@ -1,0 +1,93 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"BasicResponse": {
+				"description": "Basic response for API requests",
+				"properties": {
+					"status": {
+						"type": "number",
+						"format": "double"
+					},
+					"message": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "news-app-api",
+		"version": "0.0.1",
+		"description": "News App API for OpenWeekApps project",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {
+			"name": "Luis Martinez"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/api/hello": {
+			"get": {
+				"operationId": "SayHello",
+				"responses": {
+					"200": {
+						"description": "Say Hello",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BasicResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": 200,
+											"message": "Hello Martin"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Something went wrong"
+					}
+				},
+				"description": "Endpoint to say hello",
+				"tags": [
+					"Hello Controller"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "Name to say hello",
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
