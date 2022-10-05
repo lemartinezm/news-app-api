@@ -1,10 +1,18 @@
-import { getAllNews, getNewsByCategory } from '../database/news.odm';
+import {
+  getAllNews,
+  getNewsByCategory,
+  searchNews,
+} from '../database/news.odm';
 import { NewsResponse } from '../utils/Responses';
 import { INewsController } from './interfaces/news.interface';
 
 export class NewsController implements INewsController {
-  public async getNews(category?: string | undefined): Promise<NewsResponse> {
-    if (!category) return await getAllNews();
-    return await getNewsByCategory(category);
+  public async getNews(
+    category?: string,
+    search?: string
+  ): Promise<NewsResponse> {
+    if (search) return await searchNews(search);
+    if (category) return await getNewsByCategory(category);
+    return await getAllNews();
   }
 }

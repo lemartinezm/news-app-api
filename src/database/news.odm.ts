@@ -40,3 +40,22 @@ export async function getNewsByCategory(
 
   return response;
 }
+
+export async function searchNews(search: string): Promise<NewsResponse> {
+  const response: NewsResponse = {
+    status: 400,
+  };
+
+  try {
+    const newsModel = newsEntity();
+    await newsModel.find({ $text: { $search: search } }).then((articles) => {
+      response.articles = articles;
+      response.status = 200;
+    });
+  } catch (error) {
+    console.error(error);
+    response.message = `${error}`;
+  }
+
+  return response;
+}
