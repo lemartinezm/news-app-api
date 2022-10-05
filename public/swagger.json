@@ -18,6 +18,33 @@
 					"articles": {
 						"items": {},
 						"type": "array"
+					},
+					"meta": {
+						"properties": {
+							"totalDocuments": {
+								"type": "number",
+								"format": "double"
+							},
+							"documentsPerPage": {
+								"type": "number",
+								"format": "double"
+							},
+							"currentPage": {
+								"type": "number",
+								"format": "double"
+							},
+							"totalPages": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"totalDocuments",
+							"documentsPerPage",
+							"currentPage",
+							"totalPages"
+						],
+						"type": "object"
 					}
 				},
 				"required": [
@@ -135,6 +162,24 @@
 				],
 				"security": [],
 				"parameters": [
+					{
+						"in": "query",
+						"name": "documentsPerPage",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "currentPage",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
 					{
 						"description": "Category",
 						"in": "query",

@@ -91,11 +91,19 @@ export class NewsController implements INewsController {
     message: 'Something went wrong',
   })
   public async getNews(
+    @Query() documentsPerPage?: number,
+    @Query() currentPage?: number,
     @Query() category?: string,
     @Query() search?: string
   ): Promise<NewsResponse> {
-    if (search) return await searchNews(search);
-    if (category) return await getNewsByCategory(category);
-    return await getAllNews();
+    if (search)
+      return await searchNews(search, documentsPerPage || 10, currentPage || 1);
+    if (category)
+      return await getNewsByCategory(
+        category,
+        documentsPerPage || 10,
+        currentPage || 1
+      );
+    return await getAllNews(documentsPerPage || 10, currentPage || 1);
   }
 }

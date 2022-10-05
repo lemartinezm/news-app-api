@@ -8,4 +8,10 @@ export interface BasicResponse {
 
 export interface NewsResponse extends BasicResponse {
   articles?: any[];
+  meta?: {
+    totalPages: number;
+    currentPage: number;
+    documentsPerPage: number;
+    totalDocuments: number;
+  };
 }

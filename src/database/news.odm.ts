@@ -1,17 +1,33 @@
 import { newsEntity } from '../models/schemas/news';
 import { NewsResponse } from '../utils/Responses';
 
-export async function getAllNews(): Promise<NewsResponse> {
+export async function getAllNews(
+  documentsPerPage: number,
+  currentPage: number
+): Promise<NewsResponse> {
   const response: NewsResponse = {
     status: 400,
   };
 
   try {
     const newsModel = newsEntity();
-    await newsModel.find({}).then((articles) => {
-      response.articles = articles;
-      response.status = 200;
-    });
+    const totalDocuments = await newsModel.find({}).countDocuments();
+
+    await newsModel
+      .find({})
+      .skip(documentsPerPage * (currentPage - 1))
+      .limit(documentsPerPage)
+      .then((articles) => {
+        response.articles = articles;
+        response.status = 200;
+      });
+
+    response.meta = {
+      totalPages: Math.ceil(totalDocuments / documentsPerPage),
+      currentPage,
+      documentsPerPage,
+      totalDocuments,
+    };
   } catch (error) {
     response.message = `${error}`;
     console.error(error);
@@ -21,7 +37,9 @@ export async function getAllNews(): Promise<NewsResponse> {
 }
 
 export async function getNewsByCategory(
-  category: string
+  category: string,
+  documentsPerPage: number,
+  currentPage: number
 ): Promise<NewsResponse> {
   const response: NewsResponse = {
     status: 400,
@@ -29,10 +47,23 @@ export async function getNewsByCategory(
 
   try {
     const newsModel = newsEntity();
-    await newsModel.find({ category }).then((articles) => {
-      response.articles = articles;
-      response.status = 200;
-    });
+    const totalDocuments = await newsModel.find({}).countDocuments();
+
+    await newsModel
+      .find({ category })
+      .skip(documentsPerPage * (currentPage - 1))
+      .limit(documentsPerPage)
+      .then((articles) => {
+        response.articles = articles;
+        response.status = 200;
+      });
+
+    response.meta = {
+      totalPages: Math.ceil(totalDocuments / documentsPerPage),
+      currentPage,
+      documentsPerPage,
+      totalDocuments,
+    };
   } catch (error) {
     console.error(error);
     response.message = `${error}`;
@@ -41,17 +72,36 @@ export async function getNewsByCategory(
   return response;
 }
 
-export async function searchNews(search: string): Promise<NewsResponse> {
+export async function searchNews(
+  search: string,
+  documentsPerPage: number,
+  currentPage: number
+): Promise<NewsResponse> {
   const response: NewsResponse = {
     status: 400,
   };
 
   try {
     const newsModel = newsEntity();
-    await newsModel.find({ $text: { $search: search } }).then((articles) => {
-      response.articles = articles;
-      response.status = 200;
-    });
+    const totalDocuments = await newsModel
+      .find({ $text: { $search: search } })
+      .countDocuments();
+
+    await newsModel
+      .find({ $text: { $search: search } })
+      .skip(documentsPerPage * (currentPage - 1))
+      .limit(documentsPerPage)
+      .then((articles) => {
+        response.articles = articles;
+        response.status = 200;
+      });
+
+    response.meta = {
+      totalPages: Math.ceil(totalDocuments / documentsPerPage),
+      currentPage,
+      documentsPerPage,
+      totalDocuments,
+    };
   } catch (error) {
     console.error(error);
     response.message = `${error}`;
