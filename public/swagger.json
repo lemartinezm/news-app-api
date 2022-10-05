@@ -18,8 +18,7 @@
 					}
 				},
 				"required": [
-					"status",
-					"message"
+					"status"
 				],
 				"type": "object",
 				"additionalProperties": false

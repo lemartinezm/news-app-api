@@ -3,9 +3,16 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './public/swagger.json';
 import dotenv from 'dotenv';
 import apiRouter from './src/routes';
+import connectToMongo from './src/config/mongo.config';
 dotenv.config();
 
 const PORT: string | undefined = process.env.PORT || '8000';
+
+try {
+  connectToMongo();
+} catch (error) {
+  console.error(error);
+}
 
 const server = express();
 

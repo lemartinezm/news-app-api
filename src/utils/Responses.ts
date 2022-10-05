@@ -3,5 +3,9 @@
  */
 export interface BasicResponse {
   status: number;
-  message: string;
+  message?: string;
+}
+
+export interface NewsResponse extends BasicResponse {
+  articles?: any[];
 }
