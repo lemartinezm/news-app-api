@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './public/swagger.json';
 import dotenv from 'dotenv';
@@ -15,6 +16,7 @@ try {
 }
 
 const server = express();
+server.use(cors());
 
 server.get('/', (req: Request, res: Response) => {
   return res.redirect('/api');
