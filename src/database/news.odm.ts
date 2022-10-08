@@ -48,7 +48,7 @@ export async function getNewsByCategory(
 
   try {
     const newsModel = newsEntity();
-    const totalDocuments = await newsModel.find({}).countDocuments();
+    const totalDocuments = await newsModel.find({ category }).countDocuments();
 
     await newsModel
       .find({ category })
