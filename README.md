@@ -1,36 +1,13 @@
-# Template Express TS for API
+# News App API
 
-Contains basic config for TS, Esbuild, Express, Jest, Eslint, Prettier, documentation with decorators (tsoa) and Swagger.
+API built for OpenWeekApps project "News App" for OpenBootcamp community.
 
-## Usage:
+## Deploy
 
-Clone the repo or download as zip
+Check the deploy on [Render](https://news-app-api.onrender.com/).
 
-```
-git clone https://github.com/lemartinezm/template-ts-express
-```
-
-Install dependencies
-
-```
-npm install
-```
-
-Create .env file in the root with the port number. Example:
-```
-PORT = 8000
-```
-
-Run the project in dev mode
-
-```
-npm run dev
-```
-
-You can see the docs by default in
-```
-http://localhost:8000/docs
-```
+Endpoint docs generated with Swagger available [here](https://news-app-api.onrender.com/).
 
 ## License
+
 [MIT](LICENSE)

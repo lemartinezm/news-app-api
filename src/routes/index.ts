@@ -8,7 +8,7 @@ apiRouter.use('/news', newsRouter);
 apiRouter.get('/', (req: Request, res: Response) => {
   res.status(200).send({
     status: 200,
-    message: 'Welcome to my API',
+    message: 'Welcome to News App API',
   });
 });
 
